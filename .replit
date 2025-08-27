@@ -1,0 +1,53 @@
+modules = ["python-3.10", "web"]
+
+[nix]
+channel = "stable-25_05"
+packages = ["cargo", "libiconv", "libxcrypt", "oneDNN", "openssl", "pkg-config", "re2", "rustc"]
+
+[workflows]
+runButton = "Run Example Crew"
+
+[[workflows.workflow]]
+name = "Run CrewAI"
+author = 35427550
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uv run python -m crewai.cli.cli run"
+
+[[workflows.workflow]]
+name = "Run with UV"
+author = 35427550
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uv run crewai run"
+
+[[workflows.workflow]]
+name = "Run Tests"
+author = 35427550
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uv run python -m pytest tests/ -v -x"
+
+[[workflows.workflow]]
+name = "Run CrewAI Fixed"
+author = 35427550
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uv run python -m crewai.cli.cli run"
+
+[[workflows.workflow]]
+name = "Run Example Crew"
+author = 35427550
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "uv run python example_crew.py"
